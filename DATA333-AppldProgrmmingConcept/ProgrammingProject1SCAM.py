@@ -80,7 +80,7 @@ prices_template = {
 	"license":75,
 	"tax":0.1,
 	"sign":"$",
-	"gold":"",
+	"gold":0.0,
 	"sub":"",
 	"cart":0.0
 }
@@ -198,10 +198,16 @@ def buy():
 		else:
 			prices['gold'] = 250
 #MATH
+	#ensure we are working with float's
+	prices['license'] = float(prices['license'])
+	userinfo['lic'] = float(userinfo['lic'])
+	prices['gold'] = float(prices['gold'])
+	prices['tax'] = float(prices['tax'])
+
 	if userinfo['gold']:
- 		prices['sub'] = float(prices['license'] * userinfo['lic'] + prices['gold'])
+ 		prices['sub'] = prices['license'] * userinfo['lic'] + prices['gold']
 	else:
- 		prices['sub'] = float(prices['license'] * userinfo['lic'])
+ 		prices['sub'] = prices['license'] * userinfo['lic']
 
 	prices['cart'] =prices['sub'] + prices['sub'] * prices['tax']
 
