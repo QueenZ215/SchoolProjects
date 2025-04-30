@@ -197,10 +197,10 @@ def buy():
 			prices['gold'] = 350
 		else:
 			prices['gold'] = 250
- 	#MATH
- 	if userinfo['gold']:
+#MATH
+	if userinfo['gold']:
  		prices['sub'] = float(prices['license'] * userinfo['lic'] + prices['gold'])
- 	else:
+	else:
  		prices['sub'] = float(prices['license'] * userinfo['lic'])
 
 	prices['cart'] =prices['sub'] + prices['sub'] * prices['tax']
