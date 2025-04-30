@@ -108,7 +108,7 @@ def receipt():
     
     
     Licenses: 					{userinfo['lic']} @ {prices['sign']}{prices['license']}
-    Gold Support:				{prices['sign']}{prices['gold']}{upsell['cycle']}
+    Gold Support:				{f"{prices['sign']}{prices['gold']}{upsell['cycle']}" if userinfo['gold'] else "N/A"}
     
     SubTotal:					{prices['sub']:.2f}
     Tax:					{prices['tax'] * 100:.2f}% 
@@ -197,8 +197,12 @@ def buy():
 			prices['gold'] = 350
 		else:
 			prices['gold'] = 250
- 	#MATH                         
-	prices['sub'] = float(prices['license'] * userinfo['lic'] + prices['gold'])
+ 	#MATH
+ 	if userinfo['gold']:
+ 		prices['sub'] = float(prices['license'] * userinfo['lic'] + prices['gold'])
+ 	else:
+ 		prices['sub'] = float(prices['license'] * userinfo['lic'])
+
 	prices['cart'] =prices['sub'] + prices['sub'] * prices['tax']
 
 	print(receipt())
